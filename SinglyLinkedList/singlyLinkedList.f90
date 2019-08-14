@@ -16,31 +16,31 @@ Module SLL
    end type list  
 
    contains 
-function new(data)result(newNode)
+function new(data)result(new_node)
    implicit none 
    integer::data 
-   type(node),pointer::newNode 
+   type(node),pointer::new_node 
 
-   allocate(newNode)
-   newNode%data=data 
-   newNode%next=>null() 
+   allocate(new_node)
+   new_node%data=data 
+   new_node%next=>null() 
 end function new 
 
 subroutine append(self,data)
    implicit none 
    class(list)::self 
    integer:: data 
-   type(node),pointer::newNode 
+   type(node),pointer::new_node 
 
-   newNode=>new(data) 
+   new_node=>new(data) 
    if(.not.associated(self%head))then 
-      self%head=>newNode 
-      self%tail=>newNode 
-      newNode=>null() 
+      self%head=>new_node 
+      self%tail=>new_node 
+      new_node=>null() 
    else
-      self%tail%next=>newNode 
-      self%tail=>newNode
-      newNode=>null() 
+      self%tail%next=>new_node 
+      self%tail=>new_node
+      new_node=>null() 
    endif 
 end subroutine 
 
@@ -49,20 +49,20 @@ subroutine insert(self,pos,data)
    class(list)::self 
    integer::pos 
    integer:: data 
-   type(node),pointer::newNode,iterator,right 
+   type(node),pointer::new_node,iterator,right 
    integer::front,last,ipos  
 
    front=1
    last=self%getLen()+1 
    
-   newNode=>new(data) 
+   new_node=>new(data) 
    if(pos==front)then 
-      newNode%next=>self%head 
-      self%head=>newNode 
+      new_node%next=>self%head 
+      self%head=>new_node 
    elseif (pos>=last .or. pos==-1)then
-      self%tail%next=>newNode 
-      self%tail=>newNode
-      newNode=>null() 
+      self%tail%next=>new_node 
+      self%tail=>new_node
+      new_node=>null() 
    else 
       iterator=>self%head 
       ipos=0
@@ -70,8 +70,8 @@ subroutine insert(self,pos,data)
          ipos=ipos+1 
          if(ipos==pos)then 
             right=>iterator%next  
-            newNode%next=>right 
-            iterator%next=>newNode 
+            new_node%next=>right 
+            iterator%next=>new_node 
          else  
             iterator=>iterator%next
          endif  
@@ -99,13 +99,13 @@ subroutine display(self)
    implicit none 
    class(list)::self 
    integer:: data 
-   type(node),pointer::newNode 
+   type(node),pointer::new_node 
 
-   newNode=>self%head 
+   new_node=>self%head 
    
-   do while(associated(newNode))
-      print*,(newNode%data)
-      newNode=>newNode%next
+   do while(associated(new_node))
+      print*,(new_node%data)
+      new_node=>new_node%next
    enddo 
 end subroutine display 
 
