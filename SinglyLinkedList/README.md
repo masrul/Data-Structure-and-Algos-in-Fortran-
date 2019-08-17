@@ -1,6 +1,6 @@
 # Singly Linked List in Fortran 
 
-## Types of operations:
+## Type of operations:
 + append 
    > appends an item to the last 
 + insert 
